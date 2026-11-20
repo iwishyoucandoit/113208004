@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f4">
+  <meta name="description" content="個人行程與待辦管理">
+  <title>個人行程與任務管理系統</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{font-family:"DM Sans","Noto Sans TC",system-ui,sans-serif;color:#222a25;background:#f7f7f4;font-synthesis:none;text-rendering:optimizeLegibility;--green:#527b61;--dark:#355a43;--muted:#858b83;--line:#eceee8;--paper:#fff;--soft:#edf4ed;--shadow:0 10px 32px rgba(43,57,46,.055)}[hidden]{display:none!important}*{box-sizing:border-box}body{margin:0;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}.topbar{height:72px;padding:0 max(22px,calc((100vw - 1120px)/2));display:flex;align-items:center;justify-content:space-between;background:#ffffffde;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;font-size:14px;font-weight:700}.brand-mark{display:grid;place-items:center;width:36px;height:36px;background:var(--green);color:white;border-radius:12px;font-size:19px}.user-bar{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px}.user-bar img{width:32px;height:32px;border-radius:50%;object-fit:cover}.user-initial{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#e5eee5;color:var(--dark);font-weight:700}.quiet-button,.icon-button{border:1px solid var(--line);background:white;border-radius:8px;padding:8px 11px;color:var(--dark);font-size:12px}.quiet-button:hover,.icon-button:hover{background:var(--soft)}main{width:min(1080px,calc(100% - 40px));margin:auto;padding:36px 0 55px}.welcome{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px}.eyebrow{margin:0 0 7px;color:var(--green);font-size:11px;font-weight:700;letter-spacing:.12em}h1{margin:0;font-size:clamp(24px,3vw,32px);letter-spacing:-.035em}.subtitle{margin:8px 0 0;color:var(--muted);font-size:13px}.primary{border:0;border-radius:10px;background:var(--green);color:white;padding:11px 16px;font-weight:650;box-shadow:0 4px 12px #527b612b}.primary:hover{background:var(--dark)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat{display:flex;align-items:center;gap:14px;padding:17px 19px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}.stat-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--soft);font-size:18px}.stat-icon.peach{background:#f8eee5}.stat-icon.lavender{background:#f0eef8}.stat-label{margin:0 0 3px;color:var(--muted);font-size:11px}.stat-value{margin:0;font-size:20px;font-weight:700}.stat-value small{font-size:11px;font-weight:500;color:var(--muted)}.grid{display:grid;grid-template-columns:1.5fr .9fr;gap:18px;align-items:start}.panel{overflow:hidden;background:white;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.panel-head{min-height:70px;padding:16px 19px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.panel-head h2{margin:0;font-size:15px}.panel-head p{margin:4px 0 0;color:var(--muted);font-size:11px}.date-nav{display:flex;align-items:center;gap:9px}.date-nav .icon-button{padding:5px 10px;font-size:17px}.date-label{min-width:135px;text-align:center;font-size:11px;font-weight:600}.date-picker{width:34px;height:30px;border:1px solid var(--line);border-radius:8px;padding:3px;background:#fff}.schedule{padding:4px 19px 16px}.schedule-item{display:grid;grid-template-columns:48px 14px 1fr;gap:10px;padding:13px 0}.time{padding-top:3px;color:#777f76;font-size:11px;font-weight:600}.timeline{position:relative;display:flex;justify-content:center}.timeline:after{content:"";position:absolute;top:12px;bottom:-14px;width:1px;background:#e7ebe5}.schedule-item:last-child .timeline:after{display:none}.dot{z-index:1;width:9px;height:9px;margin-top:4px;border:2px solid white;border-radius:50%;background:#76a180;box-shadow:0 0 0 2px #76a180}.event-card{padding:11px 12px;border:1px solid #edf0e9;border-radius:10px;background:#fcfcfa}.event-top{display:flex;justify-content:space-between;gap:10px}.event-title{margin:0;font-size:13px;font-weight:650;overflow-wrap:anywhere}.event-time{color:var(--muted);font-size:10px;white-space:nowrap}.event-meta{display:flex;flex-wrap:wrap;align-items:center;gap:7px 12px;margin-top:7px;color:var(--muted);font-size:10px}.tag{padding:4px 8px;border-radius:20px;background:var(--soft);color:var(--dark);font-size:10px}.delete-button{border:0;background:transparent;color:#9c7566;font-size:10px}.task-list{padding:3px 18px}.task{display:flex;align-items:flex-start;gap:10px;padding:14px 0;border-bottom:1px solid #f0f1ed}.task:last-child{border-bottom:0}.task input{appearance:none;flex:0 0 auto;width:18px;height:18px;margin:1px 0 0;border:1px solid #cfd6ce;border-radius:6px}.task input:checked{border-color:var(--green);background:var(--green)}.task input:checked:after{content:"✓";display:block;color:white;text-align:center;line-height:16px;font-size:12px}.task-copy{flex:1;min-width:0}.task-name{margin:0;font-size:12px;font-weight:600;overflow-wrap:anywhere}.task.done .task-name{color:#929990;text-decoration:line-through}.task-due{margin:4px 0 0;color:var(--muted);font-size:10px}.task-actions{display:flex;align-items:center;gap:6px}.empty{padding:23px 8px;text-align:center;color:var(--muted);font-size:12px}.panel-foot{padding:12px 18px 16px;border-top:1px solid var(--line)}.add-task{width:100%;padding:9px;border:1px dashed #d9dfd6;border-radius:9px;background:transparent;color:var(--green);font-size:11px;font-weight:650}.bottom-note{display:flex;justify-content:space-between;gap:12px;padding:16px 3px;color:#92988f;font-size:10px}.dialog{width:min(420px,calc(100% - 28px));border:1px solid var(--line);border-radius:15px;padding:22px;box-shadow:var(--shadow)}.dialog::backdrop{background:#1c251e66;backdrop-filter:blur(2px)}.dialog h2{margin:0 0 15px;font-size:18px}.field{display:grid;gap:6px;margin:11px 0}.field label{font-size:11px;font-weight:650;color:#687167}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px;background:white}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.dialog-actions button{border:1px solid var(--line);border-radius:8px;padding:8px 13px;background:white}.dialog-actions .primary{border-color:var(--green);background:var(--green)}.toast{position:fixed;left:50%;bottom:22px;z-index:5;transform:translate(-50%,14px);opacity:0;padding:10px 15px;background:#29372d;color:white;border-radius:9px;pointer-events:none;transition:.2s;font-size:12px}.toast.show{transform:translate(-50%,0);opacity:1}.auth-screen{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:20px;background:linear-gradient(140deg,#f7f7f4,#edf3eb)}.auth-card{width:min(420px,100%);padding:34px;background:white;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 55px #26352b16;text-align:center}.auth-card .brand-mark{margin:0 auto 17px;width:46px;height:46px}.auth-card h1{font-size:23px}.auth-card p{margin:9px 0 22px;color:var(--muted);font-size:13px;line-height:1.7}.auth-button{display:flex;justify-content:center;align-items:center;gap:10px;width:100%;margin:10px 0;padding:12px;border:1px solid #dfe3dd;border-radius:10px;background:white;font-weight:600}.auth-button:hover{background:#f8f9f7}.auth-button:disabled{opacity:.5;cursor:not-allowed}.google-g{font-weight:700;color:#4285f4;font-size:17px}.line-mark{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#06c755;color:white;font-size:11px;font-weight:700}.setup-note{margin:16px 0 0!important;padding:10px 12px;background:#f8f5ea;border-radius:9px;color:#756d54!important;font-size:11px!important}
+    @media(max-width:720px){main{width:min(560px,calc(100% - 30px));padding-top:26px}.grid{grid-template-columns:1fr}.topbar{padding:0 17px}.user-bar #user-email{display:none}}
+    @media(max-width:460px){.welcome{align-items:flex-start;flex-direction:column}.stats{grid-template-columns:1fr;gap:8px}.stat{padding:11px 13px}.date-label{min-width:112px;font-size:10px}.schedule{padding-left:12px;padding-right:12px}.panel-head{padding-left:13px;padding-right:13px}.bottom-note{flex-direction:column}.user-bar{gap:7px}.quiet-button{padding:7px 8px}}
+  </style>
+</head>
+<body>
+  <div id="auth-screen" class="auth-screen">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <span class="brand-mark" aria-hidden="true">◷</span>
+      <h1 id="auth-title">讓每一天安排得更從容</h1>
+      <p>登入以同步你的行程與待辦。資料會保存在你的個人帳號中。</p>
+      <button class="auth-button" id="google-login" type="button" disabled><span class="google-g">G</span> 使用 Google 登入</button>
+      <button class="auth-button" id="line-login" type="button" disabled><span class="line-mark">L</span> 使用 LINE 登入</button>
+      <p class="setup-note" id="setup-note" hidden>請先依照 README 設定 Firebase，再啟用登入。</p>
+    </section>
+  </div>
+  <div class="app" id="app" hidden>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">◷</span><span>我的行程本</span></div>
+      <div class="user-bar"><span id="user-initial" class="user-initial">我</span><img id="user-photo" alt="" hidden><span id="user-email"></span><button id="logout" class="quiet-button" type="button">登出</button></div>
+    </header>
+    <main>
+      <section class="welcome"><div><p class="eyebrow">PERSONAL PLANNER</p><h1>個人行程與任務管理</h1><p class="subtitle">把重要的事安排好，讓每一天都從容一點。</p></div><button class="primary" id="add-event" type="button">＋ 新增行程</button></section>
+      <section class="stats" aria-label="今日摘要">
+        <article class="stat"><span class="stat-icon">▦</span><div><p class="stat-label">今日行程</p><p class="stat-value" id="event-count">0 <small>個安排</small></p></div></article>
+        <article class="stat"><span class="stat-icon peach">✓</span><div><p class="stat-label">今日待辦</p><p class="stat-value" id="task-count">0 <small>/ 0 已完成</small></p></div></article>
+        <article class="stat"><span class="stat-icon lavender">◷</span><div><p class="stat-label">規劃時間</p><p class="stat-value" id="focus-time">0 <small>小時</small></p></div></article>
+      </section>
+      <section class="grid">
+        <article class="panel">
+          <header class="panel-head"><div><h2>今日行程</h2><p>把握每個重要時刻</p></div><div class="date-nav"><button class="icon-button" id="previous-day" type="button" aria-label="前一天">‹</button><span id="date-label" class="date-label"></span><input id="date-picker" class="date-picker" type="date" aria-label="選擇日期"><button class="icon-button" id="next-day" type="button" aria-label="後一天">›</button></div></header>
+          <div class="schedule" id="schedule"></div>
+        </article>
+        <article class="panel">
+          <header class="panel-head"><div><h2>今日待辦</h2><p>一步一步完成今天的小目標</p></div><span id="task-progress" class="stat-label">0 / 0</span></header>
+          <div class="task-list" id="task-list"></div>
+          <footer class="panel-foot"><button class="add-task" id="add-task" type="button">＋ 新增一項待辦</button></footer>
+        </article>
+      </section>
+      <footer class="bottom-note"><span>今天也為自己留一點喘息的時間 ☁</span><span>保持自己的步調，就很好。</span></footer>
+    </main>
+  </div>
+  <dialog class="dialog" id="event-dialog"><form id="event-form"><h2>新增行程</h2>
+    <div class="field"><label for="event-title">行程名稱</label><input id="event-title" name="title" required maxlength="100"></div>
+    <div class="field"><label for="event-date">日期</label><input id="event-date" name="date" type="date" required></div>
+    <div class="field"><label for="event-start">開始時間</label><input id="event-start" name="start" type="time" required></div>
+    <div class="field"><label for="event-end">結束時間</label><input id="event-end" name="end" type="time" required></div>
+    <div class="field"><label for="event-location">地點（選填）</label><input id="event-location" name="location" maxlength="120"></div>
+    <div class="field"><label for="event-category">類別</label><select id="event-category" name="category"><option value="personal">個人安排</option><option value="work">工作會議</option></select></div>
+    <div class="dialog-actions"><button type="button" id="cancel-event">取消</button><button class="primary" type="submit">儲存行程</button></div>
+  </form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    if (location.protocol === "file:") {
+      const note = document.getElementById("setup-note");
+      note.textContent = "目前是直接開啟 HTML 檔，瀏覽器會阻擋 Firebase 登入。請雙擊「本機預覽.bat」，再開啟 http://localhost:8765/。";
+      note.hidden = false;
+      document.getElementById("google-login").disabled = true;
+      document.getElementById("line-login").disabled = true;
+    }
+  </script>
+  <script id="app-module" type="module" src="./app.js"></script>
+  <script>
+    document.getElementById("app-module").addEventListener("error", () => {
+      if (location.protocol === "file:") return;
+      const note = document.getElementById("setup-note");
+      note.textContent = "登入程式載入失敗，請確認網路連線後重新整理。";
+      note.hidden = false;
+    });
+  </script>
+</body>
+</html>
