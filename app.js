@@ -3,9 +3,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   OAuthProvider,
-  getRedirectResult,
   onAuthStateChanged,
-  signInWithRedirect,
+  signInWithPopup,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import {
@@ -82,9 +81,10 @@ function showAuthMessage(message, isError = false) {
 async function login(provider) {
   $("#google-login").disabled = true;
   $("#line-login").disabled = true;
-  showAuthMessage("正在前往登入頁面…");
+  showAuthMessage("正在等待登入確認…");
   try {
-    await signInWithRedirect(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    if (result.user) showAuthMessage("登入成功，正在載入你的行程…");
   } catch (error) {
     showAuthMessage(describeAuthError(error), true);
     $("#google-login").disabled = false;
@@ -252,16 +252,6 @@ if (!isFirebaseConfigured) {
   });
   lineButton.disabled = false;
   $("#logout").addEventListener("click", () => signOut(auth).catch((error) => showToast(error.message)));
-  getRedirectResult(auth).then((result) => {
-    if (result?.user) showAuthMessage("登入成功");
-  }).catch((error) => {
-    showAuthMessage(describeAuthError(error), true);
-  }).finally(() => {
-    if (!auth.currentUser) {
-      $("#google-login").disabled = false;
-      $("#line-login").disabled = false;
-    }
-  });
   onAuthStateChanged(auth, (user) => {
     currentUser = user;
     authScreen.hidden = Boolean(user);
@@ -281,5 +271,7 @@ if (!isFirebaseConfigured) {
     if (user.photoURL) $("#user-photo").src = user.photoURL;
     listenToUserData();
     render();
+  }, (error) => {
+    showAuthMessage(`讀取登入狀態失敗：${describeAuthError(error)}`, true);
   });
 }
