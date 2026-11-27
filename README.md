@@ -33,3 +33,5 @@ Channel secret 只填在 Firebase Console，**不要**放進此 GitHub Pages 專
 一般 GitHub Pages 網站網址為 `https://<帳號>.github.io/<repository>/`；Firebase 授權網域填主機名稱，不要填路徑。
 
 本機預覽請雙擊 `本機預覽.bat`，再瀏覽 `http://localhost:8765/`。直接以 `file://` 開啟 HTML 會被瀏覽器擋住 Firebase 模組與登入流程。本機 Google 登入若出現 `auth/unauthorized-domain`，請將 `localhost` 加入 Firebase Authentication 的 Authorized domains。
+
+Google 與 LINE 登入使用 Firebase redirect 流程，避免瀏覽器彈出視窗一閃即關閉。若登入被拒，登入卡片會保留 Firebase 錯誤代碼；`auth/unauthorized-domain` 表示目前網站主機尚未加入 Authorized domains，GitHub Pages 網站請加入 `iwishyoucandoit.github.io`（不要加 repository 路徑）。

@@ -3,8 +3,9 @@ import {
   getAuth,
   GoogleAuthProvider,
   OAuthProvider,
+  getRedirectResult,
   onAuthStateChanged,
-  signInWithPopup,
+  signInWithRedirect,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import {
@@ -56,20 +57,38 @@ function userCollection(name) {
 
 function describeAuthError(error) {
   const messages = {
-    "auth/unauthorized-domain": "此網站網域尚未加入 Firebase 授權網域。請依 README 設定 GitHub Pages 網域。",
-    "auth/operation-not-allowed": "Firebase 尚未啟用這種登入方式，請檢查 Authentication 設定。",
-    "auth/popup-closed-by-user": "登入視窗已關閉。",
-    "auth/popup-blocked": "瀏覽器封鎖了登入視窗，請允許彈出視窗後重試。",
+    "auth/unauthorized-domain": "目前網站網域沒有加入 Firebase Authentication 的 Authorized domains。請加入 iwishyoucandoit.github.io。",
+    "auth/operation-not-allowed": "Firebase Authentication 尚未啟用這種登入方式。",
+    "auth/auth-domain-config-required": "Firebase Auth 網域設定不完整，請確認 firebase-config.js 的 authDomain。",
+    "auth/invalid-api-key": "Firebase API key 無效，請確認 firebase-config.js 使用正確的 Web app 設定。",
+    "auth/invalid-oauth-client-id": "Google OAuth 用戶端設定無效，請檢查 Firebase Authentication 的 Google 提供者。",
+    "auth/web-storage-unsupported": "瀏覽器封鎖了登入需要的儲存功能，請允許此網站使用 Cookie／網站資料後重試。",
+    "auth/network-request-failed": "連線 Firebase 失敗，請檢查網路或瀏覽器擴充功能後重試。",
+    "auth/redirect-operation-pending": "已有一個登入程序正在處理，請稍候並重新整理頁面。",
     "auth/account-exists-with-different-credential": "這個電子郵件已使用其他登入方式註冊。",
   };
-  return messages[error.code] || `登入失敗：${error.message || error.code || "未知錯誤"}`;
+  const code = error?.code || "auth/unknown";
+  const reason = messages[code] || error?.message || "未知錯誤";
+  return `${reason}\n錯誤代碼：${code}`;
+}
+
+function showAuthMessage(message, isError = false) {
+  const element = $("#auth-message");
+  element.textContent = message;
+  element.classList.toggle("is-error", isError);
+  element.hidden = !message;
 }
 
 async function login(provider) {
+  $("#google-login").disabled = true;
+  $("#line-login").disabled = true;
+  showAuthMessage("正在前往登入頁面…");
   try {
-    await signInWithPopup(auth, provider);
+    await signInWithRedirect(auth, provider);
   } catch (error) {
-    showToast(describeAuthError(error));
+    showAuthMessage(describeAuthError(error), true);
+    $("#google-login").disabled = false;
+    $("#line-login").disabled = false;
   }
 }
 
@@ -233,6 +252,16 @@ if (!isFirebaseConfigured) {
   });
   lineButton.disabled = false;
   $("#logout").addEventListener("click", () => signOut(auth).catch((error) => showToast(error.message)));
+  getRedirectResult(auth).then((result) => {
+    if (result?.user) showAuthMessage("登入成功");
+  }).catch((error) => {
+    showAuthMessage(describeAuthError(error), true);
+  }).finally(() => {
+    if (!auth.currentUser) {
+      $("#google-login").disabled = false;
+      $("#line-login").disabled = false;
+    }
+  });
   onAuthStateChanged(auth, (user) => {
     currentUser = user;
     authScreen.hidden = Boolean(user);
